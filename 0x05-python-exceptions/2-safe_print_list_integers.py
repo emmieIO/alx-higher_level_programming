@@ -1,20 +1,12 @@
 #!/usr/bin/python3
 def safe_print_list_integers(my_list=[], x=0):
+    count = 0
     try:
-        count = 0
-        for value in my_list:
-            if count >= x:
-                break
-            
-            try:
-                integer_value = int(value)
-                print("{:d}".format(integer_value), end=' ')
+        for item in my_list[:x]:
+            if isinstance(item, int):
+                print("{:d}".format(item), end=' ')
                 count += 1
-            except (ValueError, TypeError):
-                continue  # Ignore non-integer values
-            
-        print()  # Print a newline to end the line
-        return count
-    except TypeError:
-        raise TypeError("Input list must be iterable")
-
+        print()
+    except IndexError:
+        print("Error: Index out of range")
+    return count
