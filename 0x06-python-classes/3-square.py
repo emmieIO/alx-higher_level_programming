@@ -4,7 +4,7 @@
 
 class Square:
     """This is the main Square class."""
-    
+
     def __init__(self, size=0):
         """Initialize the square with a given size.
 
