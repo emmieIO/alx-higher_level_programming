@@ -23,3 +23,9 @@ Using ``add_integer``
     TypeError: a must be an integer
     >>> add_integer(2.3, 1.2)
     3
+    >>> add_integer(2, float('nan'))
+    Traceback (most recent call last):
+    ValueError: cannot convert float NaN to integer
+    >>> add_integer(float('nan'))
+    Traceback (most recent call last):
+    ValueError: cannot convert float NaN to integer
