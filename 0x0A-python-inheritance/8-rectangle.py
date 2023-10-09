@@ -1,22 +1,19 @@
 #!/usr/bin/python3
+"""Defines a class Rectangle that inherits from BaseGeometry."""
 BaseGeometry = __import__('7-base_geometry').BaseGeometry
 
-bg = BaseGeometry()
 
-bg.integer_validator("my_int", 12)
-bg.integer_validator("width", 89)
+class Rectangle(BaseGeometry):
+    """Represent a rectangle using BaseGeometry."""
 
-try:
-    bg.integer_validator("name", "John")
-except Exception as e:
-    print("[{}] {}".format(e.__class__.__name__, e))
+    def __init__(self, width, height):
+        """Intialize a new Rectangle.
 
-try:
-    bg.integer_validator("age", 0)
-except Exception as e:
-    print("[{}] {}".format(e.__class__.__name__, e))
-
-try:
-    bg.integer_validator("distance", -4)
-except Exception as e:
-    print("[{}] {}".format(e.__class__.__name__, e))
+        Args:
+            width (int): The width of the new Rectangle.
+            height (int): The height of the new Rectangle.
+        """
+        self.integer_validator("width", width)
+        self.__width = width
+        self.integer_validator("height", height)
+        self.__height = height
