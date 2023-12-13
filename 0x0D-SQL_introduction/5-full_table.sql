@@ -1,2 +1,2 @@
 -- 5-full_table.sql
-SHOW TABLES LIKE `first_table`;
+SHOW CREATE TABLES `first_table`;
