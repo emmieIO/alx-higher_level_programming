@@ -1,2 +1,2 @@
 -- 5-full_table.sql
-SHOW `first_table` ;
+SHOW TABLE first_table ;
