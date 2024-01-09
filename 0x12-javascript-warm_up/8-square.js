@@ -7,7 +7,7 @@ if (!arg) {
   for (let i = 0; i < arg; i++) {
     let row = '';
     for (let j = 0; j < arg; j++) {
-      row += 'x';
+      row += 'X';
     }
     console.log(row);
   }
