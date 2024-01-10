@@ -1,5 +1,5 @@
 #!/usr/bin/node
-const dict = require('./tests/101-data').dict;
+const dict = require('./101-data').dict;
 const newDict = {};
 
 for (const key in dict) {
