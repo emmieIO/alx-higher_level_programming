@@ -1,25 +1,69 @@
 #!/usr/bin/python3
 """
-This script lists all states from the
-database `hbtn_0e_0_usa`.
+Script to list all states from the database hbtn_0e_0_usa.
 """
 
 import MySQLdb
-from sys import argv
+import sys
 
-if __name__ == '__main__':
+
+def list_states(username, password, db_name):
     """
-    query to the database and get the states
-    from the database.
+    Connects to the MySQL server and retrieves a
+    list of states from the specified database.
+
+    Args:
+        username (str): MySQL username.
+        password (str): MySQL password.
+        db_name (str): Database name.
+
+    Returns:
+        None
     """
-    db_connect = MySQLdb.connect(
-        host="localhost", user=argv[1], port=3306, passwd=argv[2], db=argv[3])
+    try:
+        # Connect to MySQL server
+        connection = MySQLdb.connect(host="localhost",
+                                     port=3306,
+                                     user=username,
+                                     passwd=password,
+                                     db=db_name)
 
-    db_cursor = db_connect.cursor()
+        # Create a cursor object to interact with the database
+        cursor = connection.cursor()
 
-    db_cursor.execute("SELECT * FROM states")
+        # Execute the SQL query to retrieve states
+        cursor.execute("SELECT * FROM states ORDER BY states.id ASC")
 
-    rows_selected = db_cursor.fetchall()
+        # Fetch all rows from the result set
+        rows = cursor.fetchall()
 
-    for row in rows_selected:
-        print(row)
+        # Display results
+        for row in rows:
+            print(row)
+
+    except MySQLdb.Error as e:
+        print("Error connecting to MySQL:", e)
+
+    finally:
+        # Close the cursor and connection
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
+
+
+if __name__ == "__main__":
+    """
+    Main entry point of the script.
+    """
+    # Check if correct number of command line arguments is provided
+    if len(sys.argv) != 4:
+        print("Usage: {} <mysql_username>\
+              <mysql_password> <database_name>".format(sys.argv[0]))
+        sys.exit(1)
+
+    # Get command line arguments
+    username, password, db_name = sys.argv[1], sys.argv[2], sys.argv[3]
+
+    # Call the function to list states
+    list_states(username, password, db_name)
