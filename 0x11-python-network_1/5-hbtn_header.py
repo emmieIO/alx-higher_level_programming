@@ -5,6 +5,6 @@ import sys
 
 
 if __name__ == "__main__":
-    x = requests.get(sys.argv[1])
-    x_req_id = x.headers['X-Request-Id']
-    print(x_req_id)
+    url = sys.argv[1]
+    x = requests.get(url)
+    print(x.headers.get('X-Request-Id'))
