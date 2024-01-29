@@ -1,20 +1,19 @@
 #!/usr/bin/python3
-"""2-post_email.py"""
+"""*-json api"""
 import sys
 import requests
 
 
 if __name__ == "__main__":
-    url = "http://0.0.0.0:5000/search_user"
     url_param = "" if len(sys.argv) == 1 else sys.argv[1]
-    param = {'q': url_param }
-    r= requests.get(url,param)
-    
+    q = {"q": url_param}
+
+    r = requests.post("http://0.0.0.0:5000/search_user", data=q)
     try:
-       res = r.json()
-       if res == {}:
-           print("No result")
-       else:
-           print("[{<id>}] {}".format(res.get("id"), res.get("name")))
+        response = r.json()
+        if response == {}:
+            print("No result")
+        else:
+            print("[{}] {}".format(response.get("id"), response.get("name")))
     except ValueError:
         print("Not a valid JSON")
